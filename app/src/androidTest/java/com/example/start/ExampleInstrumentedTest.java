@@ -23,4 +23,9 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.start", appContext.getPackageName());
     }
+
+    @Test
+    public void testHttp() {
+        PostUtils.CommitByPost(11, 11);
+    }
 }
