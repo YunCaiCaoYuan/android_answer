@@ -44,19 +44,31 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup.OnCheckedChangeListener ChangeRadioGroup = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            int opt = 0;
             if (i == rb1.getId() && rb1.isChecked()) {
-                Toast.makeText(MainActivity.this, rb1.getText()+"被选择", Toast.LENGTH_LONG).show();
+                opt = 1;
+//                Toast.makeText(MainActivity.this, rb1.getText()+"被选择", Toast.LENGTH_LONG).show();
             }
             if (i == rb2.getId() && rb2.isChecked()) {
-                Toast.makeText(MainActivity.this, rb2.getText()+"被选择", Toast.LENGTH_LONG).show();
+                opt = 2;
+//                Toast.makeText(MainActivity.this, rb2.getText()+"被选择", Toast.LENGTH_LONG).show();
             }
             if (i == rb3.getId() && rb3.isChecked()) {
-                Toast.makeText(MainActivity.this, rb3.getText()+"被选择", Toast.LENGTH_LONG).show();
+                opt = 3;
+//                Toast.makeText(MainActivity.this, rb3.getText()+"被选择", Toast.LENGTH_LONG).show();
             }
             if (i == rb4.getId() && rb4.isChecked()) {
-                Toast.makeText(MainActivity.this, rb4.getText()+"被选择", Toast.LENGTH_LONG).show();
+                opt = 4;
+//                Toast.makeText(MainActivity.this, rb4.getText()+"被选择", Toast.LENGTH_LONG).show();
             }
 
+            int finalOpt = opt;
+            new Thread(new Runnable(){
+                @Override
+                public void run() {
+                    //请求详情
+                    PostUtils.CommitByPost(1, finalOpt);
+                }}).start();
         }
     };
 
