@@ -32,6 +32,6 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testGetHttp() {
-        PostUtils.GetQues("http://192.168.0.17:8080/pull_question");
+        PostUtils.Get("http://192.168.0.17:8080/pull_question");
     }
 }

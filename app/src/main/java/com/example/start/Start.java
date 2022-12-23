@@ -26,14 +26,14 @@ public class Start extends AppCompatActivity {
                     @Override
                     public void run() {
                         //请求详情
-                        String res = PostUtils.GetQues("http://192.168.0.17:8080/pull_question");
+                        String res = PostUtils.Get("http://192.168.0.17:8080/pull_question_list");
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
                                 // 显示跳转第二页面
                                 Intent intent = new Intent(Start.this, MainActivity.class);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("key", res);
+                                bundle.putString("question", res);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }
