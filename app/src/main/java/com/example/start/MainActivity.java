@@ -8,6 +8,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView textview;
@@ -25,18 +29,29 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String req_content = bundle.getString("key");
+        String titleStr = "";
+        JSONArray jsonArr = null;
 
-        textview = findViewById(R.id.title);
-        textview.setText(req_content);
+        try {
+            JSONObject jObject = new JSONObject(req_content);
+            titleStr = jObject.getString("title");
+            jsonArr = jObject.getJSONArray("opts");
+            jsonArr.getString(0);
 
-        rb1 = findViewById(R.id.option1);
-        rb1.setText("火药");
-        rb2 = findViewById(R.id.option2);
-        rb2.setText("中药");
-        rb3 = findViewById(R.id.option3);
-        rb3.setText("火锅");
-        rb4 = findViewById(R.id.option4);
-        rb4.setText("指北针");
+            textview = findViewById(R.id.title);
+            textview.setText(titleStr);
+
+            rb1 = findViewById(R.id.option1);
+            rb1.setText(jsonArr.getString(0));
+            rb2 = findViewById(R.id.option2);
+            rb2.setText(jsonArr.getString(1));
+            rb3 = findViewById(R.id.option3);
+            rb3.setText(jsonArr.getString(2));
+            rb4 = findViewById(R.id.option4);
+            rb4.setText(jsonArr.getString(3));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         rg = findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(ChangeRadioGroup);
