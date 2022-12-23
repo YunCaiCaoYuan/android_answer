@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rb3;
     private RadioButton rb4;
     private RadioGroup rg;
-
+    private Integer titleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jObject = new JSONObject(req_content);
             titleStr = jObject.getString("title");
             jsonArr = jObject.getJSONArray("opts");
-            jsonArr.getString(0);
+            titleId = jObject.getInt("id");
 
             textview = findViewById(R.id.title);
             textview.setText(titleStr);
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     //请求详情
-                    PostUtils.CommitByPost(1, finalOpt);
+                    PostUtils.CommitByPost(titleId, finalOpt);
                 }}).start();
         }
     };
