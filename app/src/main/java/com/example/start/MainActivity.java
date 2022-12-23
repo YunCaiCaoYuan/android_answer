@@ -23,8 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle bundle = getIntent().getExtras();
+        String req_content = bundle.getString("key");
+
         textview = findViewById(R.id.title);
-        textview.setText("下面哪个是中国的四大发明");
+        textview.setText(req_content);
 
         rb1 = findViewById(R.id.option1);
         rb1.setText("火药");

@@ -20,9 +20,20 @@ public class Start extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+//                new Thread(new Runnable(){
+//                    @Override
+//                    public void run() {
+//                        //请求详情
+//                        PostUtils.GetQues("http://192.168.0.17:8080/pull_question");
+//                    }}).start();
+
                 // 显示跳转第二页面
                 Intent intent = new Intent(Start.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("key", "下面哪个是中国的四大发明?");
+                intent.putExtras(bundle);
                 startActivity(intent);
+
             }
         });
 

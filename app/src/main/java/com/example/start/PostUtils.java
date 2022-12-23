@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import android.util.Log;
 
 public class PostUtils {
     public static String LOGIN_URL = "http://192.168.0.17:8080/commit_answer";
@@ -63,4 +64,54 @@ public class PostUtils {
         }catch(Exception e){e.printStackTrace();}
         return msg;
     }
+
+    public static String GetQues(String url) {
+        HttpURLConnection conn = null;
+        try {
+            //利用String url构建URL对象
+            URL mURL = new URL(url);
+            conn = (HttpURLConnection) mURL.openConnection();
+
+            conn.setRequestMethod("GET");
+            conn.setReadTimeout(5000);
+            conn.setConnectTimeout(10000);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 200) {
+                InputStream is = conn.getInputStream();
+                String response = getStringFromInputStream(is);
+                Log.d( "GetQues: ", response);
+                return response;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+        return null;
+    }
+
+    private static String getStringFromInputStream(InputStream is) {
+        String state = null;
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        int len;
+        try {
+            while ((len = is.read(buf)) != -1) {
+                os.write(buf, 0, len);
+            }
+            is.close();
+            //把流中的数据转换成字符串,采用的编码是utf-8(模拟器默认编码)
+            state = os.toString();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return state;
+    }
+
+
 }
