@@ -25,12 +25,6 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void testHttp() {
-        PostUtils.CommitByPost(11, 11);
-    }
-
-
-    @Test
     public void testGetHttp() {
         PostUtils.Get("http://192.168.0.17:8080/pull_question");
     }
